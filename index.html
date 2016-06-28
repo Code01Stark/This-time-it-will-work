@@ -1,46 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<script>
+		// initialize and setup facebook js sdk
+		window.fbAsyncInit = function() {
+		    FB.init({
+		      appId      : '1077916398940819',
+		      xfbml      : true,
+		      version    : 'v2.6'
+		    });
+		    FB.getLoginStatus(function(response) {
+		    	if (response.status === 'connected') {
+		    		document.getElementById('status').innerHTML = 'We are connected.';
+		    		document.getElementById('login').style.visibility = 'hidden';
+		    	} else if (response.status === 'not_authorized') {
+		    		document.getElementById('status').innerHTML = 'We are not logged in.'
+		    	} else {
+		    		document.getElementById('status').innerHTML = 'You are not logged into Facebook.';
+		    	}
+		    });
+		};
+		(function(d, s, id){
+		    var js, fjs = d.getElementsByTagName(s)[0];
+		    if (d.getElementById(id)) {return;}
+		    js = d.createElement(s); js.id = id;
+		    js.src = "//connect.facebook.net/en_US/sdk.js";
+		    fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+		
+		// login with facebook with extra permissions
+		function login() {
+			FB.login(function(response) {
+				if (response.status === 'connected') {
+		    		document.getElementById('status').innerHTML = 'We are connected.';
+		    		document.getElementById('login').style.visibility = 'hidden';
+		    	} else if (response.status === 'not_authorized') {
+		    		document.getElementById('status').innerHTML = 'We are not logged in.'
+		    	} else {
+		    		document.getElementById('status').innerHTML = 'You are not logged into Facebook.';
+		    	}
+			}, {scope: 'email'});
+		}
+		
+		// getting basic user info
+		function getInfo() {
+			FB.api('/me', 'GET', {fields: 'first_name,last_name,name,id'}, function(response) {
+				document.getElementById('status').innerHTML = response.id;
+			});
+		}
+	</script>
 
-<!DOCTYPE html><!--[if lt IE 7]> <html lang="tr-TR" prefix="og: http://ogp.me/ns#" class="locale_tr_TR no-js ie lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]><html lang="tr-TR" prefix="og: http://ogp.me/ns#" class="locale_tr_TR no-js ie lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]><html lang="tr-TR" prefix="og: http://ogp.me/ns#" class="locale_tr_TR no-js ie lt-ie9"> <![endif]-->
-<!--[if IE 9]><html lang="tr-TR" prefix="og: http://ogp.me/ns#" class="locale_tr_TR no-js ie9"> <![endif]-->
-<!--[if gt IE 9]><html lang="tr-TR" prefix="og: http://ogp.me/ns#" class="locale_tr_TR no-js ie"> <![endif]-->
-<!--[if !IE]><!--> <html lang="tr-TR" prefix="og: http://ogp.me/ns#" class="locale_tr_TR no-js"> <!--<![endif]-->
-    <head><meta charset="utf-8" /><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" /><meta content="tr_TR" name="lang" /><!--[if lt IE 8]><meta http-equiv="refresh" content="0; url='/browser-unsupported/account/?r=cc'"><![endif]--><script>
-//<![CDATA[
-document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/,'') + ' js';
-//]]>
-</script><!--[if lt IE 9]><script src="/assets/esshim-dc0c27cf5d509331ec19.js"></script><![endif]--><!--[if lt IE 11]><script src="/assets/history-dc0c27cf5d509331ec19.js"></script><![endif]--><!--[if lt IE 9]><script>
-    document.createElement('main');
-    document.createElement('header');
-    document.createElement('footer');
-    document.createElement('article');
-    document.createElement('figure');
-    document.createElement('section');
-    document.createElement('nav');
-    document.createElement('aside');
-</script><style>
-    main, header, footer, article, figure, section, nav, aside { display: block; }
-</style><![endif]--><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" /><link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" /><title>404Sayfa bulunamadı</title>
-<meta name="description" content="The HTC Sense experience has now extended from the device to the Web" />
-<meta name="keywords" content="htcsense, htc, sense" />
-<meta name="robots" content="noindex" /><link rel="stylesheet" media="screen" href="/assets/font-common-5e3796e7c3bf864a357c75c33908e9a8.css" /><link rel="stylesheet" media="screen" href="/assets/main-f0966c245e501bb5680b467273b48796.css" /><script>
-//<![CDATA[
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');__gaTracker('create', 'UA-27904638-1', 'auto');__gaTracker('send', 'pageview');__gaTracker('set', 'dimension1', 'ar_EG');__gaTracker('set', 'dimension2', '8d0038a');
-//]]>
-</script><script>
-//<![CDATA[
-window.onerror = function(message, url, linenumber) {  __gaTracker('send', 'exception', {    'exDescription': message,    'exFatal': true,    'appName': document.location.href,    'appVersion': '8d0038a'  });};
-//]]>
-</script><script>
-//<![CDATA[
-HTC = (window.HTC) ? window.HTC : {};HTC.env = {"account_service_name":"","htc_captcha_api_prefix":"https://captcha.htcsense.com/","htc_oauth_client_id":"e17803a3-ce7a-467e-afa8-b5b71c8a17ae","htc_oauth_scope":["email","birthday","issuetoken","profile.write"]};
-//]]>
-</script></head><body dir="ltr" class=""><script>
-//<![CDATA[
-if (window.opener) { document.body.className = (document.body.className || '') + ' popup-window'; }
-//]]>
-</script><div class="loading-overlay" id="js_loading_overlay"></div><div class="overlay" id="js_overlay"></div><div class="sso-header-wrapper js-hide"> <header class="sso-header"><a class="logo" href="/"></a><div class="sso-widget-box" id="js_session_widget"></div></header></div><div class="sso-main-wrapper" id="main_wrapper"><div class="popup transparent error-page"><h1><i>404</i><span>Sayfa bulunamadı</span></h1><p>Aşağıda aradığınızı bulmanıza yardımcı olacak birkaç öneri vardır: * Doğru URL girdiğinizden emin olun. * Bu sayfaya bir yer imi/sık kullanılan aracılığıyla eriştiyseniz, en son ziyaretinizden bu yana sayfayı kaldırmış olabiliriz. * [HTC.com] adresine gidin. </p></div></div><div class="sso-footer-wrapper" id="footer_wraper"><footer><nav class="footer-nav"><div class="sso-footer-links"><a href="https://www.htcsense.com/legaldoc/terms-and-conditions">Şartlar ve Koşullar</a><a href="https://www.htcsense.com/legaldoc/privacy-statement">Gizlilik Politikası</a><a href="https://www.htcsense.com/help">Yardım</a></div><p class="copyright">Copyright © 2016 HTC Corporation. Her hakkı saklıdır.</p></nav></footer></div><script src="/assets/i18n/tr_TR-dda6e4c91ba91675703d712a5be59e4b.js"></script><script>
-//<![CDATA[
-window.location.replace("#");if (window.history && typeof window.history.replaceState == 'function') {  history.replaceState({}, '', window.location.href.slice(0, -1));}
-//]]>
-</script><!--TR 8d0038a tr_TR|en_US 1466857861--></body></html>
+	<div id="status"></div>
+	<button onclick="getInfo()">Get Info</button>
+	<button onclick="login()" id="login">Login</button>
+</body>
+</html>
